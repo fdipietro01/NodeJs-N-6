@@ -4,20 +4,14 @@ Todas las vistas están hechas con handlebars.
 
 A continuación una breve guía:
 
--http://localhost:8080/
-Esta url muestra una tabla de los productos disponibles en la base de datos y un link al manager (desde donde se edita la colección de productos)
+-http://localhost:8080/products
+Esta url muestra una tabla de los productos disponibles en la base de datos y un formulario para agregar productos en tiempo real. La vista está paginada con un limt ajustado por default a 5 resultados.
 
-
--http:localhost:8080/realtimeproducts
-Esta url muestra el manager desde donde se agregan/eliminan productos
-
--http://localhost:8080/newCart
+-http://localhost:8080/cart
 Esta url permite crear un nuevo carrito y obtener su numero de id. Con este, podemos buscar el carrito en la base de datos.
 
 
--http:localhost:8080/realtimecarts
-Esta url muestra el resultado de la búsqueda de un carrito y los productos que contiene. También permite agregar/actualizar cantidad de productos. 
+-http:localhost:8080/carts/:id
+Esta url muestra el resultado de la búsqueda de un carrito y los productos que contiene. También permite ver los productos por agregar presentes en la base de datos
 
--http:localhost:8080/chat
-Esta url muestra el chat conectado a la base de datos. Exige ingresar un nombre para identificar el usuario
 
