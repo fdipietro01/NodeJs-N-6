@@ -17,11 +17,18 @@ viewsRouter.get("/products", async (req, res) => {
   }
 });
 
-viewsRouter.get("/realtimeproducts", async (req, res) => {
+viewsRouter.get("/carts", (req, res) => {
+  res.render("homeCarritos")
+})
+
+viewsRouter.get("/carts/:cid", async (req, res) => {
+  const {cid} = req.params
   try {
-    const data = await productHandler.getProducts();
-    const dataExist = data.length === 0 ? false : true;
-    res.render("editProductos", { data, dataExist });
+    const cartProducts = await cartHandler.getProductsfromCart(cid);
+    const {payload: catalogProducts} = await productHandler.getProducts();
+    const cartExist = cartProducts.length;
+    const catalogExists = catalogProducts.length
+    res.render("editCarritos", { cartProducts, catalogProducts, cartExist, catalogExists, id: cid });
   } catch (err) {
     res.send({ error: err.message });
   }

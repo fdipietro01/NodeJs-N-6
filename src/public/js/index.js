@@ -35,3 +35,31 @@ productForm?.addEventListener("submit", async (evt) => {
     window.location.href = `${redirectUrl}/${message}`;
   }
 });
+
+
+//CREAR CARRITO
+const newCartForm = document.getElementById("newCart");
+newCartForm?.addEventListener("submit", async (evt) => {
+evt.preventDefault()
+const data = await fetch("http://localhost:8080/api/carts/", {method: "POST"})
+const parsedData = await data.json()
+alert(`Carrito creado. Número identificador: ${parsedData.id}`)
+})
+
+
+//BUSCAR CARRITO POR ID
+const searchForm = document.getElementById("searchCart");
+searchForm?.addEventListener("submit", async (evt) => {
+  evt.preventDefault();
+  const id = searchForm.elements["cartId"].value;
+  if (!id) {
+    window.alert("Ingrese un id");
+    return;
+  }
+  const data = await fetch(`http://localhost:8080/api/carts/${id}`);
+  if (data.status === 200) {
+    window.location.href = `http://localhost:8080/carts/${id}`;
+  } else {
+    window.alert("Algo salio mal, reintentar por favor")
+  }
+});
