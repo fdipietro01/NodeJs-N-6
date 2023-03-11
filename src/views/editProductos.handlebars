@@ -21,7 +21,7 @@
             </thead>
             <tbody id="body">
                 {{#if dataExist}}
-                {{#each data}}
+                {{#each payload}}
                 <tr>
                     <td class="text-center">{{this.title}}</td>
                     <td class="text-center">{{this.description}}</td>
@@ -37,6 +37,19 @@
                 {{/each}}
             </tbody>
         </table>
+        <div class="text-center" id="buttons">
+        {{!-- {{#if hasPrevPage}}
+            <button "goTo( {{prevLink}})"> Anterior </button>
+        {{/if}} --}}
+        
+        <span>{{page}}-{{totalPages}}</span>
+        
+        {{#if hasNextPage}}
+            <button id="next" name="{{nextLink}}"> Siguiente </button>
+        {{/if}}
+
+        </div>
+
         <div id="alertContainer"></div>
         {{else}}
         </tbody>
@@ -79,12 +92,13 @@
                 <label class="alert-info" style="padding:3px">Categoría</label>
                 <input type="text" class="form-control" name="category" placeholder="Ingresar Categoría">
             </div>
-            <div class="mx-auto" style="width: 40%">
-                <button type="submit" class=" btn-info">Agregar Producto</button>
+            <div class="mx-auto" style="width: 50%">
+                <button type="submit" class=" btn-info">Crear Producto en la Base</button>
             </div>
         </form>
     <script></script>
     </div>
+    {{!-- 
 
     <div class="mx-auto" style="width: 15%">
         <form id="deleteForm" method="DELETE">
@@ -97,6 +111,6 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
 
-{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+<script src="/aleas/js/index.js"></script> 

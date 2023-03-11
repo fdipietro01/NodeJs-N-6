@@ -28,15 +28,54 @@ routerCarritos.post('/', async (req, res)=>{
     }
 })
 
-routerCarritos.post('/:cid/product/:pid', async(req, res)=>{
+routerCarritos.put('/:cid/products/:pid', async(req, res)=>{
+    const {quantity} = req.body
     const {cid, pid} = req.params
     try{
-        await carritoHandler.updateProductFromCart(cid, pid)
+        await carritoHandler.updateProductQuantityFromCart(cid, pid, quantity)
         res.status(200).send({actualizado: "success"})
     }
     catch(err){ 
         res.status(400).send(err.message)
     }
 })
+
+
+
+routerCarritos.put('/:cid', async(req, res)=>{
+    const {products} = req.body
+    const {cid} = req.params
+    try{
+        await carritoHandler.updateProductsFromCart(cid, products)
+        res.status(200).send({actualizado: "success"})
+    }
+    catch(err){ 
+        res.status(400).send(err.message)
+    }
+})
+
+routerCarritos.delete('/:cid', async(req, res)=>{
+    const {cid} = req.params
+    try{
+        await carritoHandler.deleteAllProductsFromCart(cid)
+        res.status(200).send({eliminado: "success"})
+    }
+    catch(err){ 
+        res.status(400).send(err.message)
+    }
+})
+
+routerCarritos.delete('/:cid/products/:pid', async(req, res)=>{
+    const {cid, pid} = req.params
+    try{
+        await carritoHandler.deleteSingleProductFromCart(cid, pid)
+        res.status(200).send({eliminado: "success"})
+    }
+    catch(err){ 
+        res.status(400).send(err.message)
+    }
+})
+
+
 
 module.exports = routerCarritos

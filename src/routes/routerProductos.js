@@ -5,11 +5,12 @@ const routerProductos = Router();
 const productHandler = new ProductManager();
 
 routerProductos.get("/", async (req, res) => {
-  const {limit = 10, page = 1, query, sort, category, status} = req.query 
+  const {limit, page, sort, category, status} = req.query 
   try {
-    const products = await productHandler.getProducts(limit = 10, page = 1, query, sort, category, status);
-    res.send(products);
+    const productsData = await productHandler.getProducts(limit, page, sort, category, status);
+    res.send(productsData);
   } catch (err) {
+    console.log(err.message)
     res.status(400).send(err);
   }
 });
@@ -21,7 +22,7 @@ routerProductos.post("/", async (req, res) => {
     await productHandler.addProduct(producto);
     res
       .status(200)
-      .json({ redirectUrl: "http://localhost:8080/realtimeproducts" });
+      .json({ redirectUrl: "http://localhost:8080/products" });
   } catch (err) {
     res
       .status(400)
